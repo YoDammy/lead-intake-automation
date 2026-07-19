@@ -14,7 +14,7 @@ Both scenarios include error handlers (Resume/Ignore) on fragile modules — Pip
 
 ## Demo
 
-📹 Full walkthrough video available in [`/demo`](./demo)
+📹 [Watch the full walkthrough](https://youtu.be/07gYcuviRhw)
 
 ## Screenshots
 
