@@ -1,0 +1,2377 @@
+{
+    "name": "Lead Intake – Typeform to Pipedrive + Slack",
+    "flow": [
+        {
+            "id": 3,
+            "module": "typeform:WatchResponses",
+            "version": 2,
+            "parameters": {
+                "limit": 1,
+                "query": "",
+                "fields": [],
+                "formId": "f58xS8ME",
+                "__IMTCONN__": 9118092
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 300,
+                    "name": "New Lead Submitted"
+                },
+                "restore": {
+                    "parameters": {
+                        "formId": {
+                            "label": "My branded typeform"
+                        },
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "typeform2"
+                            },
+                            "label": "My Typeform connection (Dammy Odunlami <mixedbydammy@gmail.com>)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:typeform2",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit",
+                        "required": true
+                    },
+                    {
+                        "name": "formId",
+                        "type": "select",
+                        "label": "Form ID",
+                        "required": true
+                    },
+                    {
+                        "name": "completed",
+                        "type": "boolean",
+                        "label": "Completed"
+                    },
+                    {
+                        "name": "query",
+                        "type": "text",
+                        "label": "Query"
+                    },
+                    {
+                        "name": "fields",
+                        "spec": {
+                            "name": "value",
+                            "type": "select",
+                            "dynamic": true,
+                            "options": [],
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "Fields"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "landing_id",
+                        "type": "text",
+                        "label": "Landing ID"
+                    },
+                    {
+                        "name": "token",
+                        "type": "text",
+                        "label": "Token"
+                    },
+                    {
+                        "name": "response_id",
+                        "type": "text",
+                        "label": "Response ID"
+                    },
+                    {
+                        "name": "landed_at",
+                        "type": "date",
+                        "label": "Landed at"
+                    },
+                    {
+                        "name": "submitted_at",
+                        "type": "date",
+                        "label": "Submitted at"
+                    },
+                    {
+                        "name": "metadata",
+                        "spec": [
+                            {
+                                "name": "user_agent",
+                                "type": "text",
+                                "label": "User Agent"
+                            },
+                            {
+                                "name": "platform",
+                                "type": "text",
+                                "label": "Platform"
+                            },
+                            {
+                                "name": "referer",
+                                "type": "url",
+                                "label": "Referer"
+                            },
+                            {
+                                "name": "network_id",
+                                "type": "text",
+                                "label": "Network ID"
+                            },
+                            {
+                                "name": "browser",
+                                "type": "text",
+                                "label": "Browser"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Metadata"
+                    },
+                    {
+                        "name": "answers",
+                        "spec": [
+                            {
+                                "name": "field",
+                                "spec": [
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "ID"
+                                    },
+                                    {
+                                        "name": "type",
+                                        "type": "text",
+                                        "label": "Type"
+                                    },
+                                    {
+                                        "name": "ref",
+                                        "type": "text",
+                                        "label": "Internal Name"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Field"
+                            },
+                            {
+                                "name": "type",
+                                "type": "text",
+                                "label": "Type"
+                            },
+                            {
+                                "name": "text",
+                                "type": "text",
+                                "label": "Text"
+                            },
+                            {
+                                "name": "email",
+                                "type": "email",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "boolean",
+                                "type": "boolean",
+                                "label": "Boolean"
+                            },
+                            {
+                                "name": "number",
+                                "type": "number",
+                                "label": "Number"
+                            },
+                            {
+                                "name": "date",
+                                "type": "date",
+                                "label": "Date"
+                            },
+                            {
+                                "name": "long_text",
+                                "type": "text",
+                                "label": "Long Text"
+                            },
+                            {
+                                "name": "short_text",
+                                "type": "text",
+                                "label": "Short Text"
+                            },
+                            {
+                                "name": "file_url",
+                                "type": "url",
+                                "label": "File URL"
+                            },
+                            {
+                                "name": "url",
+                                "type": "url",
+                                "label": "URL"
+                            },
+                            {
+                                "name": "phone_number",
+                                "type": "text",
+                                "label": "Phone Number"
+                            },
+                            {
+                                "name": "choice",
+                                "spec": [
+                                    {
+                                        "name": "label",
+                                        "type": "text",
+                                        "label": "Label"
+                                    },
+                                    {
+                                        "name": "other",
+                                        "type": "text",
+                                        "label": "Other"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Choice"
+                            },
+                            {
+                                "name": "choices",
+                                "spec": [
+                                    {
+                                        "name": "labels",
+                                        "spec": {
+                                            "type": "text"
+                                        },
+                                        "type": "array",
+                                        "label": "Labels"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Choices"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Answers"
+                    },
+                    {
+                        "name": "mappable_answers",
+                        "spec": [
+                            {
+                                "name": "0c7ca3c6-6f77-4441-a0b3-b82692f16ff4",
+                                "type": "text",
+                                "label": "What's your full name?"
+                            },
+                            {
+                                "name": "347c91ef-322e-4026-a0e9-7b635f5bb199",
+                                "type": "email",
+                                "label": "What's the best email to reach you?"
+                            },
+                            {
+                                "name": "6454b459-de1f-4373-aee7-3a9ece9402cc",
+                                "type": "text",
+                                "label": "What's your phone number?"
+                            },
+                            {
+                                "name": "8ea85853-174a-4c10-8fed-85a060593b4f",
+                                "type": "text",
+                                "label": "What's your company name?"
+                            },
+                            {
+                                "name": "25e4a713-9a20-437d-b12d-0e2da5bfe78a",
+                                "type": "text",
+                                "label": "What do you need help with?"
+                            },
+                            {
+                                "name": "785526ba-e965-4ae7-ae05-93900a06705f",
+                                "type": "text",
+                                "label": "What's your budget range?"
+                            },
+                            {
+                                "name": "198ab7cc-3565-41b7-9506-615da5e287ff",
+                                "type": "text",
+                                "label": "How urgent is this?"
+                            },
+                            {
+                                "name": "f3233fa8-5c62-4800-a4ed-03f9f1fcb07c",
+                                "type": "text",
+                                "label": "Anything else we should know?"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Mappable Answers"
+                    },
+                    {
+                        "name": "hidden",
+                        "spec": [],
+                        "type": "collection",
+                        "label": "Hidden"
+                    },
+                    {
+                        "name": "calculated",
+                        "spec": [
+                            {
+                                "name": "score",
+                                "type": "number",
+                                "label": "Score"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Calculated"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "module": "pipedrive:CreatePersonV2",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 9118604
+            },
+            "mapper": {
+                "name": "{{3.mappable_answers.`0c7ca3c6-6f77-4441-a0b3-b82692f16ff4`}}",
+                "emails": [
+                    {
+                        "label": "Email",
+                        "value": "{{3.mappable_answers.`347c91ef-322e-4026-a0e9-7b635f5bb199`}}"
+                    }
+                ],
+                "phones": [
+                    {
+                        "label": "Phone",
+                        "value": "{{3.mappable_answers.`6454b459-de1f-4373-aee7-3a9ece9402cc`}}"
+                    }
+                ],
+                "custom_fields": {}
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 300,
+                    "name": "Add Lead to Pipedrive"
+                },
+                "restore": {
+                    "expect": {
+                        "emails": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "primary": {
+                                        "mode": "chose"
+                                    }
+                                }
+                            ]
+                        },
+                        "phones": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "primary": {
+                                        "mode": "chose"
+                                    }
+                                }
+                            ]
+                        },
+                        "label_ids": {
+                            "mode": "chose"
+                        },
+                        "visible_to": {
+                            "mode": "chose"
+                        },
+                        "marketing_status": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "pipedrive-auth"
+                            },
+                            "label": "My Pipedrive OAuth connection (venlylabs.pipedrive.com - Damilola Odunlami (YoDammy))"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:pipedrive-auth",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name",
+                        "required": true
+                    },
+                    {
+                        "name": "owner_id",
+                        "type": "uinteger",
+                        "label": "Owner ID"
+                    },
+                    {
+                        "name": "org_id",
+                        "type": "uinteger",
+                        "label": "Organization ID"
+                    },
+                    {
+                        "name": "add_time",
+                        "type": "date",
+                        "label": "Add time"
+                    },
+                    {
+                        "name": "emails",
+                        "spec": [
+                            {
+                                "name": "label",
+                                "type": "text",
+                                "label": "Label"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value",
+                                "required": true
+                            },
+                            {
+                                "name": "primary",
+                                "type": "boolean",
+                                "label": "Is primary"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Emails"
+                    },
+                    {
+                        "name": "phones",
+                        "spec": [
+                            {
+                                "name": "label",
+                                "type": "text",
+                                "label": "Label"
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value",
+                                "required": true
+                            },
+                            {
+                                "name": "primary",
+                                "type": "boolean",
+                                "label": "Is primary"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Phones"
+                    },
+                    {
+                        "name": "visible_to",
+                        "type": "select",
+                        "label": "Visible to"
+                    },
+                    {
+                        "name": "marketing_status",
+                        "type": "select",
+                        "label": "Marketing status",
+                        "validate": {
+                            "enum": [
+                                "no_consent",
+                                "unsubscribed",
+                                "subscribed",
+                                "archived"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "label_ids",
+                        "type": "select",
+                        "label": "Labels",
+                        "multiple": true,
+                        "validate": {
+                            "enum": [
+                                14,
+                                15,
+                                16,
+                                17
+                            ]
+                        }
+                    },
+                    {
+                        "name": "custom_fields",
+                        "spec": [],
+                        "type": "collection",
+                        "label": "Custom Fields"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "number",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Name"
+                    },
+                    {
+                        "name": "first_name",
+                        "type": "text",
+                        "label": "First Name"
+                    },
+                    {
+                        "name": "last_name",
+                        "type": "text",
+                        "label": "Last Name"
+                    },
+                    {
+                        "name": "add_time",
+                        "type": "date",
+                        "label": "Add Time"
+                    },
+                    {
+                        "name": "update_time",
+                        "type": "date",
+                        "label": "Update Time"
+                    },
+                    {
+                        "name": "visible_to",
+                        "type": "number",
+                        "label": "Visible To"
+                    },
+                    {
+                        "name": "owner_id",
+                        "type": "number",
+                        "label": "Owner ID"
+                    },
+                    {
+                        "name": "label_ids",
+                        "type": "array",
+                        "label": "Label IDs"
+                    },
+                    {
+                        "name": "org_id",
+                        "type": "text",
+                        "label": "Org ID"
+                    },
+                    {
+                        "name": "is_deleted",
+                        "type": "boolean",
+                        "label": "Is Deleted"
+                    },
+                    {
+                        "name": "picture_id",
+                        "type": "text",
+                        "label": "Picture ID"
+                    },
+                    {
+                        "name": "phones",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "label",
+                                    "type": "text",
+                                    "label": "Label"
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Value"
+                                },
+                                {
+                                    "name": "primary",
+                                    "type": "boolean",
+                                    "label": "Primary"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Phones"
+                    },
+                    {
+                        "name": "emails",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "label",
+                                    "type": "text",
+                                    "label": "Label"
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Value"
+                                },
+                                {
+                                    "name": "primary",
+                                    "type": "boolean",
+                                    "label": "Primary"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array",
+                        "label": "Emails"
+                    },
+                    {
+                        "name": "postal_address",
+                        "spec": [
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Full address"
+                            },
+                            {
+                                "name": "subpremise",
+                                "type": "text",
+                                "label": "Subpremise"
+                            },
+                            {
+                                "name": "street_number",
+                                "type": "text",
+                                "label": "Street number"
+                            },
+                            {
+                                "name": "route",
+                                "type": "text",
+                                "label": "Route"
+                            },
+                            {
+                                "name": "sublocality",
+                                "type": "text",
+                                "label": "Sublocality"
+                            },
+                            {
+                                "name": "locality",
+                                "type": "text",
+                                "label": "Locality"
+                            },
+                            {
+                                "name": "admin_area_level_1",
+                                "type": "text",
+                                "label": "Admin area level 1"
+                            },
+                            {
+                                "name": "admin_area_level_2",
+                                "type": "text",
+                                "label": "Admin area level 2"
+                            },
+                            {
+                                "name": "country",
+                                "type": "text",
+                                "label": "Country"
+                            },
+                            {
+                                "name": "postal_code",
+                                "type": "text",
+                                "label": "Postal code"
+                            },
+                            {
+                                "name": "formatted_address",
+                                "type": "text",
+                                "label": "Formatted address"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Postal address"
+                    },
+                    {
+                        "name": "notes",
+                        "type": "text",
+                        "label": "Notes"
+                    },
+                    {
+                        "name": "birthday",
+                        "type": "text",
+                        "label": "Birthday"
+                    },
+                    {
+                        "name": "job_title",
+                        "type": "text",
+                        "label": "Job title"
+                    },
+                    {
+                        "name": "im",
+                        "type": "array",
+                        "label": "IM"
+                    },
+                    {
+                        "name": "custom_fields",
+                        "spec": [],
+                        "type": "collection",
+                        "label": "Custom fields"
+                    }
+                ]
+            },
+            "onerror": [
+                {
+                    "id": 12,
+                    "module": "builtin:Resume",
+                    "version": 1,
+                    "parameters": {},
+                    "mapper": {
+                        "id": "",
+                        "im": [],
+                        "name": "",
+                        "notes": "",
+                        "emails": [],
+                        "org_id": "",
+                        "phones": [],
+                        "add_time": "",
+                        "birthday": "",
+                        "owner_id": "",
+                        "job_title": "",
+                        "label_ids": [],
+                        "last_name": "",
+                        "first_name": "",
+                        "picture_id": "",
+                        "visible_to": "",
+                        "update_time": "",
+                        "custom_fields": {},
+                        "postal_address": {
+                            "route": "",
+                            "value": "",
+                            "country": "",
+                            "locality": "",
+                            "subpremise": "",
+                            "postal_code": "",
+                            "sublocality": "",
+                            "street_number": "",
+                            "formatted_address": "",
+                            "admin_area_level_1": "",
+                            "admin_area_level_2": ""
+                        }
+                    },
+                    "metadata": {
+                        "designer": {
+                            "x": 600,
+                            "y": 600
+                        },
+                        "restore": {
+                            "expect": {
+                                "im": {
+                                    "mode": "chose"
+                                },
+                                "emails": {
+                                    "mode": "chose"
+                                },
+                                "phones": {
+                                    "mode": "chose"
+                                },
+                                "label_ids": {
+                                    "mode": "chose"
+                                },
+                                "is_deleted": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "expect": [
+                            {
+                                "name": "id",
+                                "type": "number",
+                                "label": "ID"
+                            },
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name"
+                            },
+                            {
+                                "name": "first_name",
+                                "type": "text",
+                                "label": "First Name"
+                            },
+                            {
+                                "name": "last_name",
+                                "type": "text",
+                                "label": "Last Name"
+                            },
+                            {
+                                "name": "add_time",
+                                "type": "date",
+                                "label": "Add Time"
+                            },
+                            {
+                                "name": "update_time",
+                                "type": "date",
+                                "label": "Update Time"
+                            },
+                            {
+                                "name": "visible_to",
+                                "type": "number",
+                                "label": "Visible To"
+                            },
+                            {
+                                "name": "owner_id",
+                                "type": "number",
+                                "label": "Owner ID"
+                            },
+                            {
+                                "name": "label_ids",
+                                "spec": {
+                                    "name": "value",
+                                    "type": "text"
+                                },
+                                "type": "array",
+                                "label": "Label IDs"
+                            },
+                            {
+                                "name": "org_id",
+                                "type": "text",
+                                "label": "Org ID"
+                            },
+                            {
+                                "name": "is_deleted",
+                                "type": "boolean",
+                                "label": "Is Deleted"
+                            },
+                            {
+                                "name": "picture_id",
+                                "type": "text",
+                                "label": "Picture ID"
+                            },
+                            {
+                                "name": "phones",
+                                "spec": {
+                                    "name": "value",
+                                    "spec": [
+                                        {
+                                            "name": "label",
+                                            "type": "text",
+                                            "label": "Label"
+                                        },
+                                        {
+                                            "name": "value",
+                                            "type": "text",
+                                            "label": "Value"
+                                        },
+                                        {
+                                            "name": "primary",
+                                            "type": "boolean",
+                                            "label": "Primary"
+                                        }
+                                    ],
+                                    "type": "collection"
+                                },
+                                "type": "array",
+                                "label": "Phones"
+                            },
+                            {
+                                "name": "emails",
+                                "spec": {
+                                    "name": "value",
+                                    "spec": [
+                                        {
+                                            "name": "label",
+                                            "type": "text",
+                                            "label": "Label"
+                                        },
+                                        {
+                                            "name": "value",
+                                            "type": "text",
+                                            "label": "Value"
+                                        },
+                                        {
+                                            "name": "primary",
+                                            "type": "boolean",
+                                            "label": "Primary"
+                                        }
+                                    ],
+                                    "type": "collection"
+                                },
+                                "type": "array",
+                                "label": "Emails"
+                            },
+                            {
+                                "name": "postal_address",
+                                "spec": [
+                                    {
+                                        "name": "value",
+                                        "type": "text",
+                                        "label": "Full address"
+                                    },
+                                    {
+                                        "name": "subpremise",
+                                        "type": "text",
+                                        "label": "Subpremise"
+                                    },
+                                    {
+                                        "name": "street_number",
+                                        "type": "text",
+                                        "label": "Street number"
+                                    },
+                                    {
+                                        "name": "route",
+                                        "type": "text",
+                                        "label": "Route"
+                                    },
+                                    {
+                                        "name": "sublocality",
+                                        "type": "text",
+                                        "label": "Sublocality"
+                                    },
+                                    {
+                                        "name": "locality",
+                                        "type": "text",
+                                        "label": "Locality"
+                                    },
+                                    {
+                                        "name": "admin_area_level_1",
+                                        "type": "text",
+                                        "label": "Admin area level 1"
+                                    },
+                                    {
+                                        "name": "admin_area_level_2",
+                                        "type": "text",
+                                        "label": "Admin area level 2"
+                                    },
+                                    {
+                                        "name": "country",
+                                        "type": "text",
+                                        "label": "Country"
+                                    },
+                                    {
+                                        "name": "postal_code",
+                                        "type": "text",
+                                        "label": "Postal code"
+                                    },
+                                    {
+                                        "name": "formatted_address",
+                                        "type": "text",
+                                        "label": "Formatted address"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Postal address"
+                            },
+                            {
+                                "name": "notes",
+                                "type": "text",
+                                "label": "Notes"
+                            },
+                            {
+                                "name": "birthday",
+                                "type": "text",
+                                "label": "Birthday"
+                            },
+                            {
+                                "name": "job_title",
+                                "type": "text",
+                                "label": "Job title"
+                            },
+                            {
+                                "name": "im",
+                                "spec": {
+                                    "name": "value",
+                                    "type": "text"
+                                },
+                                "type": "array",
+                                "label": "IM"
+                            },
+                            {
+                                "name": "custom_fields",
+                                "spec": [],
+                                "type": "collection",
+                                "label": "Custom fields"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "module": "pipedrive:createDealV2",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 9118604
+            },
+            "mapper": {
+                "title": "{{3.mappable_answers.`0c7ca3c6-6f77-4441-a0b3-b82692f16ff4`}} - {{3.mappable_answers.`25e4a713-9a20-437d-b12d-0e2da5bfe78a`}}-{{3.mappable_answers.`785526ba-e965-4ae7-ae05-93900a06705f`}}",
+                "owner_id": "{{7.owner_id}}",
+                "person_id": "{{7.id}}",
+                "custom_fields": {}
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 150,
+                    "name": "Create Deal in Pipedrive"
+                },
+                "restore": {
+                    "expect": {
+                        "status": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "label_ids": {
+                            "mode": "chose"
+                        },
+                        "visible_to": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "pipedrive-auth"
+                            },
+                            "label": "My Pipedrive OAuth connection (venlylabs.pipedrive.com - Damilola Odunlami (YoDammy))"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:pipedrive-auth",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "title",
+                        "type": "text",
+                        "label": "Title",
+                        "required": true
+                    },
+                    {
+                        "name": "value",
+                        "type": "text",
+                        "label": "Value"
+                    },
+                    {
+                        "name": "currency",
+                        "type": "text",
+                        "label": "Currency",
+                        "validate": {
+                            "max": 3,
+                            "min": 3
+                        }
+                    },
+                    {
+                        "name": "owner_id",
+                        "type": "uinteger",
+                        "label": "Owner ID"
+                    },
+                    {
+                        "name": "person_id",
+                        "type": "uinteger",
+                        "label": "Person ID"
+                    },
+                    {
+                        "name": "org_id",
+                        "type": "uinteger",
+                        "label": "Organization ID"
+                    },
+                    {
+                        "name": "stage_id",
+                        "type": "uinteger",
+                        "label": "Stage"
+                    },
+                    {
+                        "name": "status",
+                        "type": "select",
+                        "label": "Status",
+                        "validate": {
+                            "enum": [
+                                "open",
+                                "won",
+                                "lost",
+                                "deleted"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "expected_close_date",
+                        "type": "text",
+                        "label": "Expected close date"
+                    },
+                    {
+                        "name": "probability",
+                        "type": "number",
+                        "label": "Probability"
+                    },
+                    {
+                        "name": "lost_reason",
+                        "type": "text",
+                        "label": "Lost reason"
+                    },
+                    {
+                        "name": "add_time",
+                        "type": "date",
+                        "label": "Add time"
+                    },
+                    {
+                        "name": "visible_to",
+                        "type": "select",
+                        "label": "Visible to"
+                    },
+                    {
+                        "name": "label_ids",
+                        "type": "select",
+                        "label": "Labels",
+                        "multiple": true
+                    },
+                    {
+                        "name": "custom_fields",
+                        "spec": [],
+                        "type": "collection",
+                        "label": "Custom Fields"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "number",
+                        "label": "Deal ID"
+                    },
+                    {
+                        "name": "archive_time",
+                        "type": "date",
+                        "label": "Archive time"
+                    },
+                    {
+                        "name": "creator_user_id",
+                        "type": "number",
+                        "label": "Creator user"
+                    },
+                    {
+                        "name": "owner_id",
+                        "type": "number",
+                        "label": "Owner"
+                    },
+                    {
+                        "name": "person_id",
+                        "type": "number",
+                        "label": "Person"
+                    },
+                    {
+                        "name": "org_id",
+                        "type": "number",
+                        "label": "Organization"
+                    },
+                    {
+                        "name": "stage_id",
+                        "type": "number",
+                        "label": "Stage ID"
+                    },
+                    {
+                        "name": "title",
+                        "type": "text",
+                        "label": "Title"
+                    },
+                    {
+                        "name": "value",
+                        "type": "number",
+                        "label": "Value"
+                    },
+                    {
+                        "name": "currency",
+                        "type": "text",
+                        "label": "Currency"
+                    },
+                    {
+                        "name": "add_time",
+                        "type": "date",
+                        "label": "Add time"
+                    },
+                    {
+                        "name": "update_time",
+                        "type": "date",
+                        "label": "Update time"
+                    },
+                    {
+                        "name": "stage_change_time",
+                        "type": "date",
+                        "label": "Stage change time"
+                    },
+                    {
+                        "name": "is_deleted",
+                        "type": "boolean",
+                        "label": "Is deleted"
+                    },
+                    {
+                        "name": "status",
+                        "type": "text",
+                        "label": "Status"
+                    },
+                    {
+                        "name": "probability",
+                        "type": "text",
+                        "label": "Probability"
+                    },
+                    {
+                        "name": "lost_reason",
+                        "type": "text",
+                        "label": "Lost reason"
+                    },
+                    {
+                        "name": "visible_to",
+                        "type": "number",
+                        "label": "Visible to"
+                    },
+                    {
+                        "name": "close_time",
+                        "type": "date",
+                        "label": "Close time"
+                    },
+                    {
+                        "name": "close_time-raw",
+                        "type": "text",
+                        "label": "Close time (raw)"
+                    },
+                    {
+                        "name": "pipeline_id",
+                        "type": "number",
+                        "label": "Pipeline ID"
+                    },
+                    {
+                        "name": "won_time",
+                        "type": "date",
+                        "label": "Won time"
+                    },
+                    {
+                        "name": "won_time-raw",
+                        "type": "text",
+                        "label": "Won time (raw)"
+                    },
+                    {
+                        "name": "first_won_time",
+                        "type": "date",
+                        "label": "First won time"
+                    },
+                    {
+                        "name": "first_won_time-raw",
+                        "type": "text",
+                        "label": "First won time (raw)"
+                    },
+                    {
+                        "name": "lost_time",
+                        "type": "date",
+                        "label": "Lost time"
+                    },
+                    {
+                        "name": "lost_time-raw",
+                        "type": "text",
+                        "label": "Lost time (raw)"
+                    },
+                    {
+                        "name": "products_count",
+                        "type": "number",
+                        "label": "Products count"
+                    },
+                    {
+                        "name": "files_count",
+                        "type": "number",
+                        "label": "Files count"
+                    },
+                    {
+                        "name": "notes_count",
+                        "type": "number",
+                        "label": "Notes count"
+                    },
+                    {
+                        "name": "followers_count",
+                        "type": "number",
+                        "label": "Followers count"
+                    },
+                    {
+                        "name": "email_messages_count",
+                        "type": "number",
+                        "label": "Email messages count"
+                    },
+                    {
+                        "name": "activities_count",
+                        "type": "number",
+                        "label": "Activities count"
+                    },
+                    {
+                        "name": "done_activities_count",
+                        "type": "number",
+                        "label": "Done activities count"
+                    },
+                    {
+                        "name": "undone_activities_count",
+                        "type": "number",
+                        "label": "Undone activities count"
+                    },
+                    {
+                        "name": "reference_activities_count",
+                        "type": "number",
+                        "label": "Reference activities count"
+                    },
+                    {
+                        "name": "participants_count",
+                        "type": "number",
+                        "label": "Participants count"
+                    },
+                    {
+                        "name": "expected_close_date",
+                        "type": "text",
+                        "label": "Expected close date"
+                    },
+                    {
+                        "name": "expected_close_date-raw",
+                        "type": "text",
+                        "label": "Expected close date (raw)"
+                    },
+                    {
+                        "name": "last_incoming_mail_time",
+                        "type": "date",
+                        "label": "Last incoming mail time"
+                    },
+                    {
+                        "name": "last_outgoing_mail_time",
+                        "type": "date",
+                        "label": "Last outgoing mail time"
+                    },
+                    {
+                        "name": "weighted_value_currency",
+                        "type": "text",
+                        "label": "Weighted value currency"
+                    },
+                    {
+                        "name": "smart_bcc_email ",
+                        "type": "text",
+                        "label": "Smart bcc email"
+                    },
+                    {
+                        "name": "age",
+                        "spec": [
+                            {
+                                "name": "y",
+                                "type": "number",
+                                "label": "Y"
+                            },
+                            {
+                                "name": "m",
+                                "type": "number",
+                                "label": "M"
+                            },
+                            {
+                                "name": "d",
+                                "type": "number",
+                                "label": "D"
+                            },
+                            {
+                                "name": "h",
+                                "type": "number",
+                                "label": "H"
+                            },
+                            {
+                                "name": "i",
+                                "type": "number",
+                                "label": "I"
+                            },
+                            {
+                                "name": "s",
+                                "type": "number",
+                                "label": "S"
+                            },
+                            {
+                                "name": "total_seconds",
+                                "type": "number",
+                                "label": "Total seconds"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Age"
+                    },
+                    {
+                        "name": "last_activity",
+                        "type": "date",
+                        "label": "Last activity"
+                    },
+                    {
+                        "name": "next_activity",
+                        "type": "date",
+                        "label": "Next activity"
+                    },
+                    {
+                        "name": "acv",
+                        "type": "number",
+                        "label": "Annual contract value"
+                    },
+                    {
+                        "name": "mrr",
+                        "type": "number",
+                        "label": "Monthly Recurring Revenue"
+                    },
+                    {
+                        "name": "arr",
+                        "type": "number",
+                        "label": "Annual Recurring Revenue"
+                    },
+                    {
+                        "name": "local_won_date",
+                        "type": "text",
+                        "label": "Local Won Date"
+                    },
+                    {
+                        "name": "local_lost_date",
+                        "type": "text",
+                        "label": "Local Lost Date"
+                    },
+                    {
+                        "name": "local_close_date",
+                        "type": "text",
+                        "label": "Local Close Date"
+                    },
+                    {
+                        "name": "origin",
+                        "type": "text",
+                        "label": "Origin"
+                    },
+                    {
+                        "name": "origin_id",
+                        "type": "text",
+                        "label": "Origin ID"
+                    },
+                    {
+                        "name": "channel",
+                        "type": "number",
+                        "label": "Channel"
+                    },
+                    {
+                        "name": "channel_id",
+                        "type": "text",
+                        "label": "Channel ID"
+                    },
+                    {
+                        "name": "label_ids",
+                        "spec": {
+                            "type": "number"
+                        },
+                        "type": "array",
+                        "label": "Label"
+                    },
+                    {
+                        "name": "is_archived",
+                        "type": "boolean",
+                        "label": "Is archived"
+                    },
+                    {
+                        "name": "custom_fields",
+                        "spec": [],
+                        "type": "collection",
+                        "label": "Custom fields"
+                    }
+                ]
+            },
+            "onerror": [
+                {
+                    "id": 11,
+                    "module": "builtin:Resume",
+                    "version": 1,
+                    "parameters": {},
+                    "mapper": {
+                        "id": "",
+                        "acv": "",
+                        "age": {
+                            "d": "",
+                            "h": "",
+                            "i": "",
+                            "m": "",
+                            "s": "",
+                            "y": "",
+                            "total_seconds": ""
+                        },
+                        "arr": "",
+                        "mrr": "",
+                        "title": "",
+                        "value": "",
+                        "org_id": "",
+                        "origin": "",
+                        "status": "",
+                        "channel": "",
+                        "add_time": "",
+                        "currency": "",
+                        "owner_id": "",
+                        "stage_id": "",
+                        "won_time": "",
+                        "label_ids": [],
+                        "lost_time": "",
+                        "origin_id": "",
+                        "person_id": "",
+                        "channel_id": "",
+                        "close_time": "",
+                        "visible_to": "",
+                        "files_count": "",
+                        "lost_reason": "",
+                        "notes_count": "",
+                        "pipeline_id": "",
+                        "probability": "",
+                        "update_time": "",
+                        "archive_time": "",
+                        "won_time-raw": "",
+                        "custom_fields": {},
+                        "last_activity": "",
+                        "lost_time-raw": "",
+                        "next_activity": "",
+                        "close_time-raw": "",
+                        "first_won_time": "",
+                        "local_won_date": "",
+                        "products_count": "",
+                        "creator_user_id": "",
+                        "followers_count": "",
+                        "local_lost_date": "",
+                        "activities_count": "",
+                        "local_close_date": "",
+                        "smart_bcc_email ": "",
+                        "stage_change_time": "",
+                        "first_won_time-raw": "",
+                        "participants_count": "",
+                        "expected_close_date": "",
+                        "email_messages_count": "",
+                        "done_activities_count": "",
+                        "expected_close_date-raw": "",
+                        "last_incoming_mail_time": "",
+                        "last_outgoing_mail_time": "",
+                        "undone_activities_count": "",
+                        "weighted_value_currency": "",
+                        "reference_activities_count": ""
+                    },
+                    "metadata": {
+                        "designer": {
+                            "x": 900,
+                            "y": 300
+                        },
+                        "restore": {
+                            "expect": {
+                                "label_ids": {
+                                    "mode": "chose"
+                                },
+                                "is_deleted": {
+                                    "mode": "chose"
+                                },
+                                "is_archived": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "expect": [
+                            {
+                                "name": "id",
+                                "type": "number",
+                                "label": "Deal ID"
+                            },
+                            {
+                                "name": "archive_time",
+                                "type": "date",
+                                "label": "Archive time"
+                            },
+                            {
+                                "name": "creator_user_id",
+                                "type": "number",
+                                "label": "Creator user"
+                            },
+                            {
+                                "name": "owner_id",
+                                "type": "number",
+                                "label": "Owner"
+                            },
+                            {
+                                "name": "person_id",
+                                "type": "number",
+                                "label": "Person"
+                            },
+                            {
+                                "name": "org_id",
+                                "type": "number",
+                                "label": "Organization"
+                            },
+                            {
+                                "name": "stage_id",
+                                "type": "number",
+                                "label": "Stage ID"
+                            },
+                            {
+                                "name": "title",
+                                "type": "text",
+                                "label": "Title"
+                            },
+                            {
+                                "name": "value",
+                                "type": "number",
+                                "label": "Value"
+                            },
+                            {
+                                "name": "currency",
+                                "type": "text",
+                                "label": "Currency"
+                            },
+                            {
+                                "name": "add_time",
+                                "type": "date",
+                                "label": "Add time"
+                            },
+                            {
+                                "name": "update_time",
+                                "type": "date",
+                                "label": "Update time"
+                            },
+                            {
+                                "name": "stage_change_time",
+                                "type": "date",
+                                "label": "Stage change time"
+                            },
+                            {
+                                "name": "is_deleted",
+                                "type": "boolean",
+                                "label": "Is deleted"
+                            },
+                            {
+                                "name": "status",
+                                "type": "text",
+                                "label": "Status"
+                            },
+                            {
+                                "name": "probability",
+                                "type": "text",
+                                "label": "Probability"
+                            },
+                            {
+                                "name": "lost_reason",
+                                "type": "text",
+                                "label": "Lost reason"
+                            },
+                            {
+                                "name": "visible_to",
+                                "type": "number",
+                                "label": "Visible to"
+                            },
+                            {
+                                "name": "close_time",
+                                "type": "date",
+                                "label": "Close time"
+                            },
+                            {
+                                "name": "close_time-raw",
+                                "type": "text",
+                                "label": "Close time (raw)"
+                            },
+                            {
+                                "name": "pipeline_id",
+                                "type": "number",
+                                "label": "Pipeline ID"
+                            },
+                            {
+                                "name": "won_time",
+                                "type": "date",
+                                "label": "Won time"
+                            },
+                            {
+                                "name": "won_time-raw",
+                                "type": "text",
+                                "label": "Won time (raw)"
+                            },
+                            {
+                                "name": "first_won_time",
+                                "type": "date",
+                                "label": "First won time"
+                            },
+                            {
+                                "name": "first_won_time-raw",
+                                "type": "text",
+                                "label": "First won time (raw)"
+                            },
+                            {
+                                "name": "lost_time",
+                                "type": "date",
+                                "label": "Lost time"
+                            },
+                            {
+                                "name": "lost_time-raw",
+                                "type": "text",
+                                "label": "Lost time (raw)"
+                            },
+                            {
+                                "name": "products_count",
+                                "type": "number",
+                                "label": "Products count"
+                            },
+                            {
+                                "name": "files_count",
+                                "type": "number",
+                                "label": "Files count"
+                            },
+                            {
+                                "name": "notes_count",
+                                "type": "number",
+                                "label": "Notes count"
+                            },
+                            {
+                                "name": "followers_count",
+                                "type": "number",
+                                "label": "Followers count"
+                            },
+                            {
+                                "name": "email_messages_count",
+                                "type": "number",
+                                "label": "Email messages count"
+                            },
+                            {
+                                "name": "activities_count",
+                                "type": "number",
+                                "label": "Activities count"
+                            },
+                            {
+                                "name": "done_activities_count",
+                                "type": "number",
+                                "label": "Done activities count"
+                            },
+                            {
+                                "name": "undone_activities_count",
+                                "type": "number",
+                                "label": "Undone activities count"
+                            },
+                            {
+                                "name": "reference_activities_count",
+                                "type": "number",
+                                "label": "Reference activities count"
+                            },
+                            {
+                                "name": "participants_count",
+                                "type": "number",
+                                "label": "Participants count"
+                            },
+                            {
+                                "name": "expected_close_date",
+                                "type": "text",
+                                "label": "Expected close date"
+                            },
+                            {
+                                "name": "expected_close_date-raw",
+                                "type": "text",
+                                "label": "Expected close date (raw)"
+                            },
+                            {
+                                "name": "last_incoming_mail_time",
+                                "type": "date",
+                                "label": "Last incoming mail time"
+                            },
+                            {
+                                "name": "last_outgoing_mail_time",
+                                "type": "date",
+                                "label": "Last outgoing mail time"
+                            },
+                            {
+                                "name": "weighted_value_currency",
+                                "type": "text",
+                                "label": "Weighted value currency"
+                            },
+                            {
+                                "name": "smart_bcc_email ",
+                                "type": "text",
+                                "label": "Smart bcc email"
+                            },
+                            {
+                                "name": "age",
+                                "spec": [
+                                    {
+                                        "name": "y",
+                                        "type": "number",
+                                        "label": "Y"
+                                    },
+                                    {
+                                        "name": "m",
+                                        "type": "number",
+                                        "label": "M"
+                                    },
+                                    {
+                                        "name": "d",
+                                        "type": "number",
+                                        "label": "D"
+                                    },
+                                    {
+                                        "name": "h",
+                                        "type": "number",
+                                        "label": "H"
+                                    },
+                                    {
+                                        "name": "i",
+                                        "type": "number",
+                                        "label": "I"
+                                    },
+                                    {
+                                        "name": "s",
+                                        "type": "number",
+                                        "label": "S"
+                                    },
+                                    {
+                                        "name": "total_seconds",
+                                        "type": "number",
+                                        "label": "Total seconds"
+                                    }
+                                ],
+                                "type": "collection",
+                                "label": "Age"
+                            },
+                            {
+                                "name": "last_activity",
+                                "type": "date",
+                                "label": "Last activity"
+                            },
+                            {
+                                "name": "next_activity",
+                                "type": "date",
+                                "label": "Next activity"
+                            },
+                            {
+                                "name": "acv",
+                                "type": "number",
+                                "label": "Annual contract value"
+                            },
+                            {
+                                "name": "mrr",
+                                "type": "number",
+                                "label": "Monthly Recurring Revenue"
+                            },
+                            {
+                                "name": "arr",
+                                "type": "number",
+                                "label": "Annual Recurring Revenue"
+                            },
+                            {
+                                "name": "local_won_date",
+                                "type": "text",
+                                "label": "Local Won Date"
+                            },
+                            {
+                                "name": "local_lost_date",
+                                "type": "text",
+                                "label": "Local Lost Date"
+                            },
+                            {
+                                "name": "local_close_date",
+                                "type": "text",
+                                "label": "Local Close Date"
+                            },
+                            {
+                                "name": "origin",
+                                "type": "text",
+                                "label": "Origin"
+                            },
+                            {
+                                "name": "origin_id",
+                                "type": "text",
+                                "label": "Origin ID"
+                            },
+                            {
+                                "name": "channel",
+                                "type": "number",
+                                "label": "Channel"
+                            },
+                            {
+                                "name": "channel_id",
+                                "type": "text",
+                                "label": "Channel ID"
+                            },
+                            {
+                                "name": "label_ids",
+                                "spec": {
+                                    "name": "value",
+                                    "type": "number"
+                                },
+                                "type": "array",
+                                "label": "Label"
+                            },
+                            {
+                                "name": "is_archived",
+                                "type": "boolean",
+                                "label": "Is archived"
+                            },
+                            {
+                                "name": "custom_fields",
+                                "spec": [],
+                                "type": "collection",
+                                "label": "Custom fields"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "module": "slack:CreateMessage",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 4434828
+            },
+            "mapper": {
+                "text": "🔔 New lead: {{3.mappable_answers.`0c7ca3c6-6f77-4441-a0b3-b82692f16ff4`}} — {{3.mappable_answers.`25e4a713-9a20-437d-b12d-0e2da5bfe78a`}}\n📧 {{3.mappable_answers.`347c91ef-322e-4026-a0e9-7b635f5bb199`}}\n💰 Budget: {{3.mappable_answers.`785526ba-e965-4ae7-ae05-93900a06705f`}}\n⏱️ Urgency: {{3.mappable_answers.`198ab7cc-3565-41b7-9506-615da5e287ff`}}",
+                "parse": false,
+                "mrkdwn": true,
+                "channel": "C0BK3QAS516",
+                "channelType": "public",
+                "channelWType": "list"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0,
+                    "name": "Notify Me on Slack"
+                },
+                "restore": {
+                    "expect": {
+                        "parse": {
+                            "mode": "chose"
+                        },
+                        "mrkdwn": {
+                            "mode": "chose"
+                        },
+                        "channel": {
+                            "mode": "chose",
+                            "label": "new-leads"
+                        },
+                        "link_names": {
+                            "mode": "chose"
+                        },
+                        "channelType": {
+                            "label": "Public channel"
+                        },
+                        "channelWType": {
+                            "label": "Select from the list"
+                        },
+                        "unfurl_links": {
+                            "mode": "chose"
+                        },
+                        "unfurl_media": {
+                            "mode": "chose"
+                        },
+                        "reply_broadcast": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "slack2"
+                            },
+                            "label": "Slack connection (salesteam-qkh6773.slack.com - damilami95)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:slack2,slack3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "channelWType",
+                        "type": "select",
+                        "label": "Enter a channel ID or name",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "manualy",
+                                "list"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Text"
+                    },
+                    {
+                        "name": "blocks",
+                        "type": "text",
+                        "label": "Blocks"
+                    },
+                    {
+                        "name": "thread_ts",
+                        "type": "text",
+                        "label": "Thread message ID (time stamp)"
+                    },
+                    {
+                        "name": "reply_broadcast",
+                        "type": "boolean",
+                        "label": "Reply broadcast"
+                    },
+                    {
+                        "name": "link_names",
+                        "type": "boolean",
+                        "label": "Link names"
+                    },
+                    {
+                        "name": "parse",
+                        "type": "boolean",
+                        "label": "Parse message text"
+                    },
+                    {
+                        "name": "mrkdwn",
+                        "type": "boolean",
+                        "label": "Use markdown"
+                    },
+                    {
+                        "name": "unfurl_links",
+                        "type": "boolean",
+                        "label": "Unfurl primarily text-based content"
+                    },
+                    {
+                        "name": "unfurl_media",
+                        "type": "boolean",
+                        "label": "Unfurl media content"
+                    },
+                    {
+                        "name": "icon_emoji",
+                        "type": "text",
+                        "label": "Icon emoji"
+                    },
+                    {
+                        "name": "icon_url",
+                        "type": "url",
+                        "label": "Icon url"
+                    },
+                    {
+                        "name": "username",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "channelType",
+                        "type": "select",
+                        "label": "Channel type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "public",
+                                "private",
+                                "im",
+                                "mpim"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "channel",
+                        "type": "select",
+                        "label": "Public channel",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "module": "google-email:sendAnEmail",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 9119396
+            },
+            "mapper": {
+                "to": [
+                    "{{3.mappable_answers.`347c91ef-322e-4026-a0e9-7b635f5bb199`}}"
+                ],
+                "content": "Hi {{7.first_name}},\n\nThanks for getting in touch about {{3.mappable_answers.`25e4a713-9a20-437d-b12d-0e2da5bfe78a`}} — I'd love to learn more.\n\nPick a time that works for you here: https://cal.com/damilola-odunlami-yodammy-l1k1rl/quick-call\n\nTalk soon.",
+                "subject": "Thanks for reaching out, {{7.first_name}}! Let's find a time to talk",
+                "bodyType": "rawHtml"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0,
+                    "name": "Send Booking Link to Lead"
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        },
+                        "from": {
+                            "mode": "chose"
+                        },
+                        "bodyType": {
+                            "label": "Raw HTML"
+                        },
+                        "attachments": {
+                            "mode": "chose"
+                        },
+                        "emailHeaders": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-email"
+                            },
+                            "label": "My Gmail connection (mixedbydammy@gmail.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google-email",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Recipient email address",
+                            "required": true,
+                            "validate": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "rawHtml",
+                                "collection"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "filename",
+                                    "type": "filename",
+                                    "label": "File name",
+                                    "required": true,
+                                    "semantic": "file:name"
+                                },
+                                {
+                                    "name": "data",
+                                    "type": "buffer",
+                                    "label": "Data",
+                                    "required": true,
+                                    "semantic": "file:data"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Attachment"
+                        },
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "From"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Recipient email address"
+                        },
+                        "type": "array",
+                        "label": "CC recipients"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Recipient email address"
+                        },
+                        "type": "array",
+                        "label": "BCC recipients"
+                    },
+                    {
+                        "name": "emailHeaders",
+                        "spec": {
+                            "name": "value",
+                            "spec": [
+                                {
+                                    "name": "key",
+                                    "type": "text",
+                                    "label": "Key",
+                                    "required": true
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "text",
+                                    "label": "Value"
+                                }
+                            ],
+                            "type": "collection",
+                            "label": "Email header"
+                        },
+                        "type": "array",
+                        "label": "Additional email headers"
+                    },
+                    {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                    }
+                ]
+            },
+            "onerror": [
+                {
+                    "id": 14,
+                    "module": "builtin:Resume",
+                    "version": 1,
+                    "parameters": {},
+                    "mapper": {
+                        "id": "",
+                        "labelIds": [],
+                        "threadId": "",
+                        "sysFolders": [],
+                        "categoryFolders": [],
+                        "userLabelFolders": []
+                    },
+                    "metadata": {
+                        "designer": {
+                            "x": 1500,
+                            "y": 0
+                        },
+                        "restore": {
+                            "expect": {
+                                "labelIds": {
+                                    "mode": "chose"
+                                },
+                                "sysFolders": {
+                                    "mode": "chose"
+                                },
+                                "categoryFolders": {
+                                    "mode": "chose"
+                                },
+                                "userLabelFolders": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "expect": [
+                            {
+                                "name": "id",
+                                "type": "text",
+                                "label": "Message ID"
+                            },
+                            {
+                                "name": "threadId",
+                                "type": "text",
+                                "label": "Thread ID"
+                            },
+                            {
+                                "name": "sysFolders",
+                                "spec": [
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "System folder ID"
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "System folder name"
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "System folders"
+                            },
+                            {
+                                "name": "categoryFolders",
+                                "spec": [
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "Category folder ID"
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "Category folder name"
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "Category folders"
+                            },
+                            {
+                                "name": "userLabelFolders",
+                                "spec": [
+                                    {
+                                        "name": "id",
+                                        "type": "text",
+                                        "label": "User label folder ID"
+                                    },
+                                    {
+                                        "name": "name",
+                                        "type": "text",
+                                        "label": "User label folder name"
+                                    }
+                                ],
+                                "type": "array",
+                                "label": "User label folders"
+                            },
+                            {
+                                "name": "labelIds",
+                                "spec": {
+                                    "name": "value",
+                                    "type": "text"
+                                },
+                                "type": "array",
+                                "label": "Message folder IDs"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.com",
+        "notes": []
+    }
+}
