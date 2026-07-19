@@ -18,12 +18,17 @@ Both scenarios include error handlers (Resume/Ignore) on fragile modules — Pip
 
 ## Screenshots
 
-| Step | Preview |
-|---|---|
-| Slack Notification | `/screenshots/slack-notification.png` |
-| Pipedrive Deal | `/screenshots/pipedrive-deal.png` |
-| Booking Email | `/screenshots/email-received.png` |
-| ClickUp Onboarding Task | `/screenshots/clickup-task.png` |
+**Slack Notification**
+![Slack Notification](./screenshots/slack-notification.png)
+
+**Pipedrive Deal**
+![Pipedrive Deal](./screenshots/pipedrive-deal.png)
+
+**Booking Email**
+![Booking Email](./screenshots/email-received.png)
+
+**ClickUp Onboarding Task**
+![ClickUp Onboarding Task](./screenshots/clickup-task.png)
 
 ## Blueprints
 
